@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>idv.shawnyang.poc.asciidoctor</groupId>
+		<artifactId>poc-asciidoctor</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../../poc-asciidoctor</relativePath>
+	</parent>
+	<artifactId>demo-docs</artifactId>
+	<name>PoC Asciidoctor Documentations</name>
+	<description>Asciidoctor documentations PoC</description>
+
+	<properties>
+		<!-- Can't remove the line below, -->
+		<!--otherwise the encoding is not inherit from parent -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<asciidoctor.maven.plugin.version>1.5.5</asciidoctor.maven.plugin.version>
+		<asciidoctorj.pdf.version>1.5.0-alpha.16</asciidoctorj.pdf.version>
+	</properties>
+
+	<build>
+		<defaultGoal>process-resources</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>${asciidoctor.maven.plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctorj-pdf</artifactId>
+						<version>${asciidoctorj.pdf.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<!-- Attributes common to all output formats -->
+					<attributes>
+						<define-your-attributes-here>Define your attribute here</define-your-attributes-here>
+						<you-can-apply-attributes-on-doc>You can apply attributes on
+							docuemtns</you-can-apply-attributes-on-doc>
+					</attributes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>asciidoc-to-html</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>html5</backend>
+							<attributes>
+								<toc>left</toc>
+								<icons>font</icons>
+								<!-- set the idprefix to blank -->
+								<idprefix />
+								<idseparator>-</idseparator>
+								<imagesdir>./images</imagesdir>
+								<docinfo1>true</docinfo1>
+								<sectanchors>true</sectanchors>
+							</attributes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>asciidoc-to-pdf</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>pdf</backend>
+							<attributes>
+								<toc />
+								<icons>font</icons>
+								<!-- set the idprefix to blank -->
+								<idprefix />
+								<idseparator>-</idseparator>
+								<imagesdir>./images</imagesdir>
+								<pagenums />
+								<allow-uri-read/>
+							</attributes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<packaging>pom</packaging>
+</project>

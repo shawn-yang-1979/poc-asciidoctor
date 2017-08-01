@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.4.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>idv.shawnyang.poc.asciidoctor</groupId>
+	<artifactId>poc-asciidoctor</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<nexusproxy>http://10.120.137.45:18081/nexus</nexusproxy>
+		<repobasepath>content/repositories</repobasepath>
+	</properties>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshot</id>
+			<url>${nexusproxy}/${repobasepath}/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<profiles>
+		<profile>
+			<id>repo-official</id>
+			<activation>
+				<property>
+					<name>repo</name>
+					<value>official</value>
+				</property>
+			</activation>
+			<properties>
+				<nexusproxy>http://10.120.137.129:18081/nexus</nexusproxy>
+			</properties>
+		</profile>
+	</profiles>
+	<modules>
+		
+		<module>demo-docs</module>
+	</modules>
+</project>
